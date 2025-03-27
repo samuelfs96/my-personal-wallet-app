@@ -9,7 +9,7 @@ interface TransactionsProps {
 
 export const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 overflow-y-auto max-h-[300px]">
       {transactions.map((transaction) => (
         <div
           key={transaction.id}
