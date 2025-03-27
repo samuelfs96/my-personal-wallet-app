@@ -1,6 +1,8 @@
+import { TransactionType } from './transactionTypes';
+
 export interface Transaction {
   id: string;
-  type: 'income' | 'expense';
+  type: TransactionType;
   amount: number;
   description: string;
   date: string;

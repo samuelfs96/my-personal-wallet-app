@@ -1,12 +1,13 @@
-import { Balance, Card, Transactions } from '@/components';
+import { Balance, Card, TransactionForm, Transactions } from '@/components';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import '@/App.css';
 import { Transaction } from '@/models';
+import { TransactionType } from '@/models/transactionTypes';
 
 const sampleTransactions: Transaction[] = [
   {
     id: '1',
-    type: 'income',
+    type: TransactionType.INCOME,
     amount: 2500.75,
     description: 'Salary',
     date: 'Mar 27, 2024',
@@ -14,7 +15,7 @@ const sampleTransactions: Transaction[] = [
   },
   {
     id: '2',
-    type: 'expense',
+    type: TransactionType.EXPENSE,
     amount: 150.5,
     description: 'Grocery Shopping',
     date: 'Mar 26, 2024',
@@ -22,7 +23,7 @@ const sampleTransactions: Transaction[] = [
   },
   {
     id: '3',
-    type: 'expense',
+    type: TransactionType.EXPENSE,
     amount: 45.0,
     description: 'Netflix Subscription',
     date: 'Mar 25, 2024',
@@ -46,13 +47,13 @@ function App() {
           <div className="flex-2 flex flex-col gap-5">
             <div className="grid grid-cols-3 gap-5">
               <Card
-                title="New Transaction"
                 className="col-span-2"
+                title="New Transaction"
                 icon={<PlusCircleIcon className="w-5 h-5" />}
               >
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <TransactionForm onSubmit={() => {}} />
               </Card>
-              <Card className="col-span-1">
+              <Card>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
               </Card>
             </div>
