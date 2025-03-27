@@ -13,12 +13,14 @@ export const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
       {transactions.map((transaction) => (
         <div
           key={transaction.id}
-          className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+          className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
         >
           <div className="flex items-center gap-3">
             <div
               className={`p-2 rounded-lg ${
-                transaction.type === 'income' ? 'bg-green-50' : 'bg-red-50'
+                transaction.type === 'income'
+                  ? 'bg-green-50 dark:bg-green-300'
+                  : 'bg-red-50 dark:bg-red-300'
               }`}
             >
               {transaction.type === 'income' ? (
@@ -28,14 +30,16 @@ export const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
               )}
             </div>
             <div>
-              <p className="font-medium text-gray-900">{transaction.description}</p>
-              <p className="text-sm text-gray-500">{transaction.category}</p>
+              <p className="font-medium text-gray-900 dark:text-white">{transaction.description}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{transaction.category}</p>
             </div>
           </div>
           <div className="text-right">
             <p
               className={`font-medium ${
-                transaction.type === 'income' ? 'text-green-600' : 'text-red-600'
+                transaction.type === 'income'
+                  ? 'text-green-600 dark:text-green-400'
+                  : 'text-red-600 dark:text-red-400'
               }`}
             >
               {transaction.type === 'income' ? '+' : '-'}

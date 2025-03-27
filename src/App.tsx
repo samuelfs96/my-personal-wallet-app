@@ -40,15 +40,11 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-900 dark:to-gray-800 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex gap-5 max-[768px]:flex-col">
           <div className="flex-1 flex flex-col gap-5">
-            <Card
-              className="dark:bg-gray-800"
-              title="Balance"
-              icon={<WalletIcon className="w-5 h-5" />}
-            >
+            <Card title="Balance" icon={<WalletIcon className="w-5 h-5" />}>
               <Balance amount={balance} />
             </Card>
             <Card title="Statistics" icon={<ChartBarIcon className="w-5 h-5" />}>

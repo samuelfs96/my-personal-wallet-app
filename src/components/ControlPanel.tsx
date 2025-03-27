@@ -14,7 +14,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
     <div className="flex flex-wrap justify-center items-center gap-4">
       <button
         onClick={onChangeTheme}
-        className="cursor-pointer p-4 bg-orange-50 rounded-full hover:bg-orange-100 transition-colors"
+        className="cursor-pointer p-4 bg-orange-50 dark:bg-gray-700 rounded-full hover:bg-orange-100 dark:hover:bg-gray-600 transition-colors"
         title="Dark Mode"
       >
         <SunIcon className="w-6 h-6 text-orange-500" />
@@ -22,7 +22,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
 
       <button
         onClick={onClearTransactions}
-        className="cursor-pointer p-4 bg-red-50 rounded-full hover:bg-red-100 transition-colors"
+        className="cursor-pointer p-4 bg-red-50 dark:bg-gray-700 rounded-full hover:bg-red-100 dark:hover:bg-gray-600 transition-colors"
         title="Clear All"
       >
         <TrashIcon className="w-6 h-6 text-red-500" />
