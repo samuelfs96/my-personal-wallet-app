@@ -3,5 +3,5 @@
 @theme {
   --*: initial;
   --spacing: 4px;
-  --default-font-family: 'Poppins', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
 }
