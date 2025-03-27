@@ -1,4 +1,4 @@
-// Export common components here
-
-export { Card } from './Card';
+// Export components here
 export { Balance } from './Balance';
+export { Card } from './Card';
+export { Transactions } from './Transactions';
