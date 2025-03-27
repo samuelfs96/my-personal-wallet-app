@@ -1,6 +1,34 @@
-import { Balance, Card } from './components';
+import { Balance, Card, Transactions } from '@/components';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
-import './App.css';
+import '@/App.css';
+import { Transaction } from '@/models';
+
+const sampleTransactions: Transaction[] = [
+  {
+    id: '1',
+    type: 'income',
+    amount: 2500.75,
+    description: 'Salary',
+    date: 'Mar 27, 2024',
+    category: 'Work',
+  },
+  {
+    id: '2',
+    type: 'expense',
+    amount: 150.5,
+    description: 'Grocery Shopping',
+    date: 'Mar 26, 2024',
+    category: 'Food',
+  },
+  {
+    id: '3',
+    type: 'expense',
+    amount: 45.0,
+    description: 'Netflix Subscription',
+    date: 'Mar 25, 2024',
+    category: 'Entertainment',
+  },
+];
 
 function App() {
   return (
@@ -29,7 +57,7 @@ function App() {
               </Card>
             </div>
             <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+              <Transactions transactions={sampleTransactions} />
             </Card>
           </div>
         </div>
