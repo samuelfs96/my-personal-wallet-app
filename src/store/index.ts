@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import walletReducer from './slices/walletSlice';
+import transactionsReducer from './slices/transactionsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -12,9 +13,18 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, walletReducer);
 
+const transactionsPersistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['transactions'], // Only persist transactions
+};
+
+const transactionsPersistedReducer = persistReducer(transactionsPersistConfig, transactionsReducer);
+
 export const store = configureStore({
   reducer: {
     wallet: persistedReducer,
+    transactions: transactionsPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
