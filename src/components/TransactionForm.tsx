@@ -48,8 +48,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
-            <option value={TransactionType.EXPENSE}>Expense</option>
             <option value={TransactionType.INCOME}>Income</option>
+            <option value={TransactionType.EXPENSE}>Expense</option>
           </select>
         </div>
         <div className="flex-1">
