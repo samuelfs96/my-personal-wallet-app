@@ -1,1 +1,4 @@
-export const CATEGORIES = ['Work', 'Food', 'Entertainment'];
+export const CATEGORIES = {
+  expense: ['Work', 'Food', 'Entertainment'],
+  income: ['Salary', 'Other'],
+};

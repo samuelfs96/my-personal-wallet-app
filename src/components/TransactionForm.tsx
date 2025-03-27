@@ -7,18 +7,20 @@ interface TransactionFormProps {
   onSubmit: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
 }
 
+const initialFormData = {
+  type: TransactionType.INCOME,
+  amount: '',
+  description: '',
+  category: 'Salary',
+};
+
 export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<{
     type: TransactionType;
     amount: string;
     description: string;
     category: string;
-  }>({
-    type: TransactionType.EXPENSE,
-    amount: '',
-    description: '',
-    category: 'Food',
-  });
+  }>(initialFormData);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,15 +28,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
       ...formData,
       amount: parseFloat(formData.amount),
     };
-
     onSubmit(transaction);
-
-    setFormData({
-      type: TransactionType.EXPENSE,
-      amount: '',
-      description: '',
-      category: 'Food',
-    });
+    setFormData(initialFormData);
   };
 
   return (
@@ -44,7 +39,13 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
           <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
           <select
             value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value as TransactionType })}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                type: e.target.value as TransactionType,
+                category: CATEGORIES[e.target.value as TransactionType][0] || '',
+              })
+            }
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
             <option value={TransactionType.EXPENSE}>Expense</option>
@@ -70,7 +71,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
           >
-            {CATEGORIES.map((category) => (
+            {CATEGORIES[formData.type].map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>
