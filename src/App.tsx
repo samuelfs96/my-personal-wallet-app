@@ -1,4 +1,4 @@
-import { Card } from './components/common';
+import { Balance, Card } from './components';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import './App.css';
 
@@ -9,7 +9,7 @@ function App() {
         <div className="flex gap-5">
           <div className="flex-1 flex flex-col gap-5">
             <Card title="Balance" icon={<WalletIcon className="w-5 h-5" />}>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+              <Balance amount={2500.75} />
             </Card>
             <Card title="Statistics" icon={<ChartBarIcon className="w-5 h-5" />}>
               <p>Soon...</p>
