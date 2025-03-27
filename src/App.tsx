@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { Transaction } from '@/models';
 import { addTransaction } from '@/store/slices/transactionsSlice';
+import { setBalance } from '@/store/slices/walletSlice';
 
 function App() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
+  const balance = useSelector((state: RootState) => state.wallet.balance);
   const dispatch = useDispatch();
   const submitTransaction = (transaction: Omit<Transaction, 'id' | 'date'>) => {
     dispatch(addTransaction(transaction));
+    dispatch(setBalance(transaction.type === 'income' ? transaction.amount : -transaction.amount));
   };
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 py-8 px-4">
@@ -18,7 +21,7 @@ function App() {
         <div className="flex gap-5">
           <div className="flex-1 flex flex-col gap-5">
             <Card title="Balance" icon={<WalletIcon className="w-5 h-5" />}>
-              <Balance amount={2500.75} />
+              <Balance amount={balance} />
             </Card>
             <Card title="Statistics" icon={<ChartBarIcon className="w-5 h-5" />}>
               <p>Soon...</p>
