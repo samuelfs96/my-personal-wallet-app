@@ -47,8 +47,11 @@ function App() {
             <Card title="Balance" icon={<WalletIcon className="w-5 h-5" />}>
               <Balance amount={balance} />
             </Card>
-            <Card title="Statistics" icon={<ChartBarIcon className="w-5 h-5" />}>
-              <p>Soon...</p>
+            <Card>
+              <ControlPanel
+                onClearTransactions={handleClearTransactions}
+                onChangeTheme={handleOnChangeTheme}
+              />
             </Card>
           </div>
           <div className="flex-2 flex flex-col gap-5">
@@ -60,11 +63,12 @@ function App() {
               >
                 <TransactionForm onSubmit={submitTransaction} />
               </Card>
-              <Card className="max-[768px]:col-span-1">
-                <ControlPanel
-                  onClearTransactions={handleClearTransactions}
-                  onChangeTheme={handleOnChangeTheme}
-                />
+              <Card
+                className="max-[768px]:col-span-1"
+                title="Statistics"
+                icon={<ChartBarIcon className="w-5 h-5" />}
+              >
+                <p>Soon...</p>
               </Card>
             </div>
             <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>
