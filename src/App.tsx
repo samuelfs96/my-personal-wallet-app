@@ -1,20 +1,33 @@
-import { Balance, Card, TransactionForm, Transactions } from '@/components';
+import { Balance, Card, TransactionForm, Transactions, ControlPanel } from '@/components';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import '@/App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { Transaction } from '@/models';
-import { addTransaction } from '@/store/slices/transactionsSlice';
-import { setBalance } from '@/store/slices/walletSlice';
+import { addTransaction, clearTransactions } from '@/store/slices/transactionsSlice';
+import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
 
 function App() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
   const balance = useSelector((state: RootState) => state.wallet.balance);
   const dispatch = useDispatch();
+
+  const handleClearTransactions = () => {
+    if (
+      window.confirm(
+        'Are you sure you want to clear all transactions and reset balance? This action cannot be undone.'
+      )
+    ) {
+      dispatch(clearTransactions());
+      dispatch(emptyBalance());
+    }
+  };
+
   const submitTransaction = (transaction: Omit<Transaction, 'id' | 'date'>) => {
     dispatch(addTransaction(transaction));
     dispatch(setBalance(transaction.type === 'income' ? transaction.amount : -transaction.amount));
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
@@ -37,7 +50,7 @@ function App() {
                 <TransactionForm onSubmit={submitTransaction} />
               </Card>
               <Card className="max-[768px]:col-span-1">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <ControlPanel onClearTransactions={handleClearTransactions} />
               </Card>
             </div>
             <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>

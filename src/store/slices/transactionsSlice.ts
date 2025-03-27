@@ -22,8 +22,11 @@ export const transactionsSlice = createSlice({
       };
       state.transactions.unshift(newTransaction);
     },
+    clearTransactions: (state) => {
+      state.transactions = [];
+    },
   },
 });
 
-export const { addTransaction } = transactionsSlice.actions;
+export const { addTransaction, clearTransactions } = transactionsSlice.actions;
 export default transactionsSlice.reducer;
