@@ -1,37 +1,17 @@
 import { Balance, Card, TransactionForm, Transactions } from '@/components';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import '@/App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import { Transaction } from '@/models';
-import { TransactionType } from '@/models/transactionTypes';
-
-const sampleTransactions: Transaction[] = [
-  {
-    id: '1',
-    type: TransactionType.INCOME,
-    amount: 2500.75,
-    description: 'Salary',
-    date: 'Mar 27, 2024',
-    category: 'Work',
-  },
-  {
-    id: '2',
-    type: TransactionType.EXPENSE,
-    amount: 150.5,
-    description: 'Grocery Shopping',
-    date: 'Mar 26, 2024',
-    category: 'Food',
-  },
-  {
-    id: '3',
-    type: TransactionType.EXPENSE,
-    amount: 45.0,
-    description: 'Netflix Subscription',
-    date: 'Mar 25, 2024',
-    category: 'Entertainment',
-  },
-];
+import { addTransaction } from '@/store/slices/transactionsSlice';
 
 function App() {
+  const transactions = useSelector((state: RootState) => state.transactions.transactions);
+  const dispatch = useDispatch();
+  const submitTransaction = (transaction: Omit<Transaction, 'id' | 'date'>) => {
+    dispatch(addTransaction(transaction));
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
@@ -51,14 +31,14 @@ function App() {
                 title="New Transaction"
                 icon={<PlusCircleIcon className="w-5 h-5" />}
               >
-                <TransactionForm onSubmit={() => {}} />
+                <TransactionForm onSubmit={submitTransaction} />
               </Card>
               <Card>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
               </Card>
             </div>
             <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>
-              <Transactions transactions={sampleTransactions} />
+              <Transactions transactions={transactions} />
             </Card>
           </div>
         </div>

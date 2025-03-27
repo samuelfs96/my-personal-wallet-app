@@ -22,10 +22,13 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({
+    const transaction = {
       ...formData,
       amount: parseFloat(formData.amount),
-    });
+    };
+
+    onSubmit(transaction);
+
     setFormData({
       type: TransactionType.EXPENSE,
       amount: '',
