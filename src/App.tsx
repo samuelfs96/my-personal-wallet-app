@@ -7,6 +7,7 @@ import { Transaction } from '@/models';
 import { addTransaction, clearTransactions } from '@/store/slices/transactionsSlice';
 import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
 import { toggleDarkMode } from '@/store/slices/themeSlice';
+import { useEffect } from 'react';
 
 function App() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
@@ -33,12 +34,21 @@ function App() {
     dispatch(setBalance(transaction.type === 'income' ? transaction.amount : -transaction.amount));
   };
 
+  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex gap-5 max-[768px]:flex-col">
           <div className="flex-1 flex flex-col gap-5">
-            <Card title="Balance" icon={<WalletIcon className="w-5 h-5" />}>
+            <Card
+              className="dark:bg-gray-800"
+              title="Balance"
+              icon={<WalletIcon className="w-5 h-5" />}
+            >
               <Balance amount={balance} />
             </Card>
             <Card title="Statistics" icon={<ChartBarIcon className="w-5 h-5" />}>
