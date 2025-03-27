@@ -3,7 +3,8 @@ import { Transaction } from '@/models';
 import { TransactionType } from '@/models/transactionTypes';
 import { CATEGORIES } from '@/models/categories';
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
-import { TabButton } from '@/components';
+import { TabButton } from '@/components/common';
+import { Input } from '@/components/common/Input';
 
 interface TransactionFormProps {
   onSubmit: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
@@ -74,11 +75,10 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
           <label className="block text-xs font-medium text-gray-700 mb-1 dark:text-gray-400">
             Amount
           </label>
-          <input
+          <Input
             type="number"
             value={formData.amount}
             onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-            className="w-full text-sm px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
             placeholder="0.00"
             required
             min="0"
@@ -109,11 +109,10 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
           <label className="block text-xs font-medium text-gray-700 mb-1 dark:text-gray-400">
             Description
           </label>
-          <input
+          <Input
             type="text"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="w-full text-sm px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800 dark:border-gray-700 dark:text-white"
             placeholder="Enter description"
             required
           />

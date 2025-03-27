@@ -1,4 +1,3 @@
-import { Balance, Card, TransactionForm, Transactions, ControlPanel } from '@/components';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import '@/App.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +7,8 @@ import { addTransaction, clearTransactions } from '@/store/slices/transactionsSl
 import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
 import { toggleDarkMode } from '@/store/slices/themeSlice';
 import { useEffect } from 'react';
+import { Card } from '@/components/common';
+import { ControlPanel, TransactionForm, Transactions, Balance } from '@/components/features';
 
 function App() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);

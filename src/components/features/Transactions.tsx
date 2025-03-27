@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
 import { Transaction } from '@/models';
-import { Pagination } from './common/Pagination';
+import { Pagination } from '@/components/common';
 
 interface TransactionsProps {
   transactions: Transaction[];
