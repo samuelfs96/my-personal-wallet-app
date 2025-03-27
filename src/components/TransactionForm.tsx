@@ -3,7 +3,7 @@ import { Transaction } from '@/models';
 import { TransactionType } from '@/models/transactionTypes';
 import { CATEGORIES } from '@/models/categories';
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
-import { TabButton } from '@/components/TabButton';
+import { TabButton } from '@/components';
 
 interface TransactionFormProps {
   onSubmit: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
@@ -122,7 +122,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
 
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors dark:focus:ring-offset-gray-800"
+        className="w-full cursor-pointer py-2 px-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors dark:focus:ring-offset-gray-800"
       >
         Add Transaction
       </button>
