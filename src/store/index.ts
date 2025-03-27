@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -8,24 +8,18 @@ import transactionsReducer from './slices/transactionsSlice';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['wallet'], // Only persist wallet reducer
+  whitelist: ['wallet', 'transactions'], // Persist all reducers
 };
 
-const persistedReducer = persistReducer(persistConfig, walletReducer);
+const rootReducer = combineReducers({
+  wallet: walletReducer,
+  transactions: transactionsReducer,
+});
 
-const transactionsPersistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['transactions'], // Only persist transactions
-};
-
-const transactionsPersistedReducer = persistReducer(transactionsPersistConfig, transactionsReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    wallet: persistedReducer,
-    transactions: transactionsPersistedReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
