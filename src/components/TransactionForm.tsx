@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Transaction } from '@/models';
 import { TransactionType } from '@/models/transactionTypes';
+import { CATEGORIES } from '@/models/categories';
 
 interface TransactionFormProps {
   onSubmit: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
@@ -16,7 +17,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
     type: TransactionType.EXPENSE,
     amount: '',
     description: '',
-    category: '',
+    category: 'Food',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -29,7 +30,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
       type: TransactionType.EXPENSE,
       amount: '',
       description: '',
-      category: '',
+      category: 'Food',
     });
   };
 
@@ -58,15 +59,20 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
             required
           />
         </div>
-        <div>
+        <div className="flex-1">
           <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-          <input
-            type="text"
+          <select
             value={formData.category}
             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
-          />
+          >
+            {CATEGORIES.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
