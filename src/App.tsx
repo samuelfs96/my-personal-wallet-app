@@ -6,11 +6,16 @@ import { RootState } from '@/store';
 import { Transaction } from '@/models';
 import { addTransaction, clearTransactions } from '@/store/slices/transactionsSlice';
 import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
+import { toggleDarkMode } from '@/store/slices/themeSlice';
 
 function App() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
   const balance = useSelector((state: RootState) => state.wallet.balance);
   const dispatch = useDispatch();
+
+  const handleOnChangeTheme = () => {
+    dispatch(toggleDarkMode());
+  };
 
   const handleClearTransactions = () => {
     if (
@@ -50,7 +55,10 @@ function App() {
                 <TransactionForm onSubmit={submitTransaction} />
               </Card>
               <Card className="max-[768px]:col-span-1">
-                <ControlPanel onClearTransactions={handleClearTransactions} />
+                <ControlPanel
+                  onClearTransactions={handleClearTransactions}
+                  onChangeTheme={handleOnChangeTheme}
+                />
               </Card>
             </div>
             <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>

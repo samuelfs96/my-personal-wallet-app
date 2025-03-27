@@ -4,16 +4,18 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import walletReducer from './slices/walletSlice';
 import transactionsReducer from './slices/transactionsSlice';
+import themeReducer from './slices/themeSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['wallet', 'transactions'], // Persist all reducers
+  whitelist: ['wallet', 'transactions', 'theme'],
 };
 
 const rootReducer = combineReducers({
   wallet: walletReducer,
   transactions: transactionsReducer,
+  theme: themeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
