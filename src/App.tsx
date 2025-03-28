@@ -19,7 +19,7 @@ export const App: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex gap-5 max-[768px]:flex-col">
           <div className="flex-1 flex flex-col gap-5">
-            <Card title="Balance" icon={<WalletIcon className="w-5 h-5" />}>
+            <Card title="My personal wallet" icon={<WalletIcon className="w-5 h-5" />}>
               <Balance amount={balance} />
             </Card>
             <Card>

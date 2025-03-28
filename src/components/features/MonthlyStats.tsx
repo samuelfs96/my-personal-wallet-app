@@ -1,15 +1,11 @@
 import React from 'react';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Line,
-} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Transaction } from '@/models';
+import {
+  ArrowTrendingDownIcon,
+  ArrowTrendingUpIcon,
+  CircleStackIcon,
+} from '@heroicons/react/24/outline';
 
 interface MonthlyStatsProps {
   transactions: Transaction[];
@@ -70,13 +66,17 @@ export const MonthlyStats: React.FC<MonthlyStatsProps> = ({ transactions }) => {
   const data = getMonthlyData();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+    <div className="flex flex-col-reverse gap-8">
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" className="dark:stroke-gray-700" />
-            <XAxis dataKey="month" className="dark:text-gray-400" tick={{ fill: 'currentColor' }} />
-            <YAxis className="dark:text-gray-400" tick={{ fill: 'currentColor' }} />
+            <XAxis
+              dataKey="month"
+              className="dark:text-gray-400 text-sm"
+              tick={{ fill: 'currentColor' }}
+            />
+            <YAxis className="dark:text-gray-400 text-sm" tick={{ fill: 'currentColor' }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -86,34 +86,41 @@ export const MonthlyStats: React.FC<MonthlyStatsProps> = ({ transactions }) => {
               }}
               labelStyle={{ color: '#4b5563' }}
             />
-            <Line type="monotone" dataKey="uv" stroke="#ff7300" />
-            <Bar dataKey="income" fill="#10b981" name="Income" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="expenses" fill="#ef4444" name="Expenses" radius={[4, 4, 0, 0]} />
+
+            <Bar
+              dataKey="income"
+              fill="oklch(0.765 0.177 163.223)"
+              name="Income"
+              radius={[4, 4, 0, 0]}
+            />
+            <Bar
+              dataKey="expenses"
+              fill="oklch(0.704 0.191 22.216)"
+              name="Expenses"
+              radius={[4, 4, 0, 0]}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-4 grid grid-cols-3 gap-4">
-        <div className="text-center">
+      <div className="mt-4 flex flex-wrap justify-center gap-12 max-[768px]:gap-4">
+        <div className="flex flex-col items-center justify-center">
+          <ArrowTrendingUpIcon className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
           <p className="text-sm text-gray-500 dark:text-gray-400">Total Income</p>
-          <p className="text-lg font-semibold text-green-600 dark:text-green-400">
+          <p className="text-lg font-semibold text-emerald-600 dark:text-emerald-400">
             ${data.reduce((sum, month) => sum + month.income, 0).toFixed(2)}
           </p>
         </div>
-        <div className="text-center">
+        <div className="flex flex-col items-center justify-center">
+          <ArrowTrendingDownIcon className="w-8 h-8 text-red-400 dark:text-red-300" />
           <p className="text-sm text-gray-500 dark:text-gray-400">Total Expenses</p>
-          <p className="text-lg font-semibold text-red-600 dark:text-red-400">
+          <p className="text-lg font-semibold text-red-400 dark:text-red-300">
             ${data.reduce((sum, month) => sum + month.expenses, 0).toFixed(2)}
           </p>
         </div>
-        <div className="text-center">
+        <div className="flex flex-col items-center justify-center">
+          <CircleStackIcon className="w-8 h-8 text-gray-500 dark:text-gray-400" />
           <p className="text-sm text-gray-500 dark:text-gray-400">Net Balance</p>
-          <p
-            className={`text-lg font-semibold ${
-              data.reduce((sum, month) => sum + month.balance, 0) >= 0
-                ? 'text-green-600 dark:text-green-400'
-                : 'text-red-600 dark:text-red-400'
-            }`}
-          >
+          <p className={`text-lg font-semibold text-gray-500 dark:text-gray-400`}>
             ${data.reduce((sum, month) => sum + month.balance, 0).toFixed(2)}
           </p>
         </div>
