@@ -3,8 +3,7 @@ import { Transaction } from '@/models';
 import { TransactionType } from '@/models/transactionTypes';
 import { CATEGORIES } from '@/models/categories';
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/outline';
-import { TabButton } from '@/components/common';
-import { Input } from '@/components/common/Input';
+import { TabButton, Input } from '@/components/common';
 
 interface TransactionFormProps {
   onSubmit: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
