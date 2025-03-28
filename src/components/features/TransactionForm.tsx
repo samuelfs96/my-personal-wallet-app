@@ -120,7 +120,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSubmit }) =>
 
       <button
         type="submit"
-        className="w-full cursor-pointer py-2 px-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors dark:focus:ring-offset-gray-800"
+        className="w-full cursor-pointer py-2 px-4 bg-orange-400 text-white rounded-lg hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors dark:focus:ring-offset-gray-800"
       >
         Add Transaction
       </button>

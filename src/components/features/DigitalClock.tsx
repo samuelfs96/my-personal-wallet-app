@@ -28,7 +28,7 @@ export const DigitalClock: React.FC = () => {
           <div className="text-6xl font-bold font-mono text-orange-300 dark:text-orange-200">
             {hours}:{minutes}
           </div>
-          <div className="text-3xl text-right italic font-bold font-mono text-orange-200 dark:text-orange-100">
+          <div className="text-3xl text-right italic font-bold font-mono text-orange-200 dark:text-orange-200">
             :{seconds}
           </div>
         </div>
