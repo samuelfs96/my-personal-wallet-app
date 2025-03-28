@@ -4,3 +4,4 @@ export { TransactionInfo } from './TransactionInfo';
 export { ControlPanel } from './ControlPanel';
 export { Balance } from './Balance';
 export { MonthlyStats } from './MonthlyStats';
+export { DigitalClock } from './DigitalClock';

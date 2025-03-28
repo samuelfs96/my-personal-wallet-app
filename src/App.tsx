@@ -7,6 +7,7 @@ import {
   Transactions,
   Balance,
   MonthlyStats,
+  DigitalClock,
 } from '@/components/features';
 import { useTransactions, useTheme } from '@/hooks';
 
@@ -43,13 +44,13 @@ export const App: React.FC = () => {
               </Card>
               <Card
                 className="max-[768px]:col-span-1"
-                title="Statistics"
-                icon={<ChartBarIcon className="w-5 h-5" />}
+                title="Current Time"
+                icon={<ClockIcon className="w-5 h-5" />}
               >
-                <p>Soon...</p>
+                <DigitalClock />
               </Card>
             </div>
-            <Card title="Monthly Stats" icon={<ClockIcon className="w-5 h-5" />}>
+            <Card title="Monthly Stats" icon={<ChartBarIcon className="w-5 h-5" />}>
               <MonthlyStats transactions={transactions} />
             </Card>
           </div>
