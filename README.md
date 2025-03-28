@@ -2,6 +2,8 @@
 
 A modern, responsive personal wallet application built with React, TypeScript, and Redux Toolkit. This app helps you track your income and expenses with a clean, intuitive interface.
 
+![Personal Wallet App Screenshot](src/assets/app_screenshot.png)
+
 ## Features
 
 - 💰 **Transaction Management**
@@ -11,6 +13,7 @@ A modern, responsive personal wallet application built with React, TypeScript, a
   - Delete individual transactions
   - Clear all transactions
   - Real-time balance updates
+  - Export transactions to Excel
 
 - 🎨 **Modern UI/UX**
 
@@ -18,18 +21,27 @@ A modern, responsive personal wallet application built with React, TypeScript, a
   - Dark mode support
   - Responsive design
   - Smooth transitions and animations
+  - Digital clock with date display
 
 - 📊 **Smart Features**
 
   - Transaction categorization
+  - Monthly statistics with visual charts
   - Pagination for transaction history
   - Persistent storage using Redux Persist
   - Type-safe development with TypeScript
 
 - 🌙 **Theme Support**
+
   - Light/Dark mode toggle
   - Persistent theme preference
   - Smooth theme transitions
+
+- 📈 **Statistics and Reports**
+  - Monthly income/expense overview
+  - Visual transaction trends
+  - Net balance tracking
+  - Export data to Excel
 
 ## Tech Stack
 
@@ -37,8 +49,10 @@ A modern, responsive personal wallet application built with React, TypeScript, a
 - **State Management**: Redux Toolkit
 - **Styling**: Tailwind CSS
 - **Icons**: Heroicons
+- **Charts**: Recharts
 - **Persistence**: Redux Persist
 - **Type Safety**: TypeScript
+- **Export**: XLSX
 
 ## Getting Started
 
