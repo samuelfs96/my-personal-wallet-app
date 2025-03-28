@@ -22,11 +22,14 @@ export const transactionsSlice = createSlice({
       };
       state.transactions.unshift(newTransaction);
     },
+    removeTransaction: (state, action: PayloadAction<string>) => {
+      state.transactions = state.transactions.filter((t) => t.id !== action.payload);
+    },
     clearTransactions: (state) => {
       state.transactions = [];
     },
   },
 });
 
-export const { addTransaction, clearTransactions } = transactionsSlice.actions;
+export const { addTransaction, removeTransaction, clearTransactions } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

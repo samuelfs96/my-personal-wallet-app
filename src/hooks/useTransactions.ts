@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { clearTransactions, addTransaction } from '@/store/slices/transactionsSlice';
+import {
+  clearTransactions,
+  addTransaction,
+  removeTransaction,
+} from '@/store/slices/transactionsSlice';
 import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
 import { Transaction } from '@/models';
 
@@ -25,10 +29,21 @@ export const useTransactions = () => {
     dispatch(setBalance(transaction.type === 'income' ? transaction.amount : -transaction.amount));
   };
 
+  const handleDeleteTransaction = (id: string) => {
+    const transaction = transactions.find((t) => t.id === id);
+    if (!transaction) return;
+    if (window.confirm('Are you sure you want to delete this transaction?')) {
+      dispatch(removeTransaction(id));
+      const amount = transaction.type === 'income' ? -transaction.amount : transaction.amount;
+      dispatch(setBalance(amount));
+    }
+  };
+
   return {
     transactions,
     balance,
     handleClearTransactions,
     submitTransaction,
+    handleDeleteTransaction,
   };
 };
