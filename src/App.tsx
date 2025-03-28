@@ -1,43 +1,11 @@
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import { Transaction } from '@/models';
-import { addTransaction, clearTransactions } from '@/store/slices/transactionsSlice';
-import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
-import { toggleDarkMode } from '@/store/slices/themeSlice';
-import { useEffect } from 'react';
 import { Card } from '@/components/common';
 import { ControlPanel, TransactionForm, Transactions, Balance } from '@/components/features';
+import { useTransactions, useTheme } from '@/hooks';
 
 function App() {
-  const transactions = useSelector((state: RootState) => state.transactions.transactions);
-  const balance = useSelector((state: RootState) => state.wallet.balance);
-  const dispatch = useDispatch();
-
-  const handleOnChangeTheme = () => {
-    dispatch(toggleDarkMode());
-  };
-
-  const handleClearTransactions = () => {
-    if (
-      window.confirm(
-        'Are you sure you want to clear all transactions and reset balance? This action cannot be undone.'
-      )
-    ) {
-      dispatch(clearTransactions());
-      dispatch(emptyBalance());
-    }
-  };
-
-  const submitTransaction = (transaction: Omit<Transaction, 'id' | 'date'>) => {
-    dispatch(addTransaction(transaction));
-    dispatch(setBalance(transaction.type === 'income' ? transaction.amount : -transaction.amount));
-  };
-
-  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDarkMode);
-  }, [isDarkMode]);
+  const { transactions, balance, handleClearTransactions, submitTransaction } = useTransactions();
+  const { handleOnChangeTheme } = useTheme();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 dark:from-gray-900 dark:to-gray-800 py-8 px-4">
