@@ -23,7 +23,7 @@ export const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
 
   return (
     <div className="space-y-4">
-      <div className="overflow-y-auto max-h-[300px] gap-2 flex flex-col">
+      <div className="overflow-y-auto max-h-[400px] gap-2 flex flex-col">
         {currentTransactions.map((transaction) => (
           <TransactionInfo key={transaction.id} transaction={transaction} />
         ))}
