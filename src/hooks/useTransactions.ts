@@ -7,6 +7,7 @@ import {
 } from '@/store/slices/transactionsSlice';
 import { emptyBalance, setBalance } from '@/store/slices/walletSlice';
 import { Transaction } from '@/models';
+import * as XLSX from 'xlsx';
 
 export const useTransactions = () => {
   const dispatch = useDispatch();
@@ -39,11 +40,33 @@ export const useTransactions = () => {
     }
   };
 
+  const handleExportExcel = () => {
+    // Prepare data for Excel
+    const data = transactions.map((transaction) => ({
+      Date: transaction.date,
+      Type: transaction.type,
+      Category: transaction.category,
+      Description: transaction.description,
+      Amount: transaction.type === 'income' ? transaction.amount : -transaction.amount,
+    }));
+
+    // Create workbook and worksheet
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data);
+
+    // Add worksheet to workbook
+    XLSX.utils.book_append_sheet(wb, ws, 'Transactions');
+
+    // Generate Excel file
+    XLSX.writeFile(wb, `transactions-${new Date().toISOString().split('T')[0]}.xlsx`);
+  };
+
   return {
     transactions,
     balance,
     handleClearTransactions,
     submitTransaction,
     handleDeleteTransaction,
+    handleExportExcel,
   };
 };

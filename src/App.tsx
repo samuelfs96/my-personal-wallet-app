@@ -12,7 +12,8 @@ import {
 import { useTransactions, useTheme } from '@/hooks';
 
 export const App: React.FC = () => {
-  const { transactions, balance, handleClearTransactions, submitTransaction } = useTransactions();
+  const { transactions, balance, handleClearTransactions, submitTransaction, handleExportExcel } =
+    useTransactions();
   const { handleOnChangeTheme } = useTheme();
 
   return (
@@ -27,6 +28,7 @@ export const App: React.FC = () => {
               <ControlPanel
                 onClearTransactions={handleClearTransactions}
                 onChangeTheme={handleOnChangeTheme}
+                handleExportExcel={handleExportExcel}
               />
             </Card>
             <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>

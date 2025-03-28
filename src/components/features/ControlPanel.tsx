@@ -1,14 +1,16 @@
 import React from 'react';
-import { SunIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { SunIcon, TrashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 
 interface ControlPanelProps {
   onChangeTheme?: () => void;
   onClearTransactions?: () => void;
+  handleExportExcel?: () => void;
 }
 
 export const ControlPanel: React.FC<ControlPanelProps> = ({
   onChangeTheme,
   onClearTransactions,
+  handleExportExcel,
 }) => {
   return (
     <div className="flex flex-wrap justify-center items-center gap-4">
@@ -18,6 +20,14 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         title="Dark Mode"
       >
         <SunIcon className="w-6 h-6 text-orange-500" />
+      </button>
+
+      <button
+        onClick={handleExportExcel}
+        className="cursor-pointer p-4 bg-green-50 dark:bg-gray-700 rounded-full hover:bg-green-100 dark:hover:bg-gray-600 transition-colors"
+        title="Export to Excel"
+      >
+        <ArrowDownTrayIcon className="w-6 h-6 text-green-500" />
       </button>
 
       <button
