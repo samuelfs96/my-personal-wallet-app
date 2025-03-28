@@ -1,9 +1,16 @@
+import React from 'react';
 import { WalletIcon, ChartBarIcon, PlusCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { Card } from '@/components/common';
-import { ControlPanel, TransactionForm, Transactions, Balance } from '@/components/features';
+import {
+  ControlPanel,
+  TransactionForm,
+  Transactions,
+  Balance,
+  MonthlyStats,
+} from '@/components/features';
 import { useTransactions, useTheme } from '@/hooks';
 
-function App() {
+export const App: React.FC = () => {
   const { transactions, balance, handleClearTransactions, submitTransaction } = useTransactions();
   const { handleOnChangeTheme } = useTheme();
 
@@ -20,6 +27,9 @@ function App() {
                 onClearTransactions={handleClearTransactions}
                 onChangeTheme={handleOnChangeTheme}
               />
+            </Card>
+            <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>
+              <Transactions transactions={transactions} />
             </Card>
           </div>
           <div className="flex-2 flex flex-col gap-5">
@@ -39,14 +49,14 @@ function App() {
                 <p>Soon...</p>
               </Card>
             </div>
-            <Card title="Latest Transactions" icon={<ClockIcon className="w-5 h-5" />}>
-              <Transactions transactions={transactions} />
+            <Card title="Monthly Stats" icon={<ClockIcon className="w-5 h-5" />}>
+              <MonthlyStats transactions={transactions} />
             </Card>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
