@@ -15,7 +15,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-center gap-2 mt-4">
+    <div className="flex justify-center gap-2 mt-4 flex-wrap">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
